@@ -13,7 +13,16 @@ A personal repository for organizing and maintaining Codex skills.
 
 ## Status
 
-The repository has been initialized. Candidates are cataloged first, then selected, copied, or rewritten. Source files are not modified automatically.
+The repository has been initialized. Candidates are cataloged first, then selected, copied, or rewritten. `handle-review` and `neneko-cr` are now included. Source files are not modified automatically.
+
+## Daily Development Workflows
+
+The two included skills are both part of the daily development workflow:
+
+- `handle-review`: Handles an individual PR review thread by verifying the claim against current HEAD, judging validity and scope, applying the smallest complete fix, adding regression coverage, validating it, and drafting English-first replies with folded Chinese.
+- `neneko-cr`: Runs a repository-agnostic CR workflow for triage, CI and review gates, evidence-backed comments, own-PR maintenance, approval/merge decisions, and auditable reports.
+
+In short, `handle-review` focuses on one comment or thread, while `neneko-cr` focuses on repository-level review orchestration. They can be used independently or together.
 
 ## Install skills across agents
 
@@ -26,14 +35,21 @@ npx skills@latest add . --list
 # Project scope: available in the current project
 npx skills@latest add . --skill handle-review --agent codex --agent claude-code --agent opencode --yes
 
+# Install the general-purpose CR skill
+npx skills@latest add . --skill neneko-cr --agent codex --agent claude-code --agent opencode --yes
+
 # Global scope: available across projects
 npx skills@latest add . --skill handle-review --agent codex --agent claude-code --agent opencode --global --yes
+
+# Global install for the general-purpose CR skill
+npx skills@latest add . --skill neneko-cr --agent codex --agent claude-code --agent opencode --global --yes
 ```
 
 Install from GitHub:
 
 ```bash
 npx skills@latest add XnLemon/Neneko-skill --skill handle-review --agent codex --agent claude-code --agent opencode --yes
+npx skills@latest add XnLemon/Neneko-skill --skill neneko-cr --agent codex --agent claude-code --agent opencode --yes
 ```
 
 For local development or synchronization:

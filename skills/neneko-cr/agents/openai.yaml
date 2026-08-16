@@ -1,0 +1,4 @@
+interface:
+  display_name: "Neneko CR"
+  short_description: "Repository-agnostic code review and merge workflow"
+  default_prompt: "执行 neneko-cr"
