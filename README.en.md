@@ -1,6 +1,6 @@
 # Personal Skills
 
-English | [中文](README.md)
+[GitHub](https://github.com/XnLemon/Neneko-skill) · English | [中文](README.md)
 
 A personal repository for organizing and maintaining Codex skills.
 
@@ -34,7 +34,20 @@ npx skills@latest add . --skill handle-review --agent codex --agent claude-code 
 npx skills@latest add . --skill handle-review --agent codex --agent claude-code --agent opencode --global --yes
 ```
 
-After publishing the repository to GitHub, replace `./` with `<owner>/neneko-skill`. Use `--copy` instead of the default symlink method when symlinks are not suitable. To list, check, or update installed skills:
+Install from GitHub:
+
+```bash
+npx skills@latest add XnLemon/Neneko-skill --skill handle-review --agent codex --agent claude-code --agent opencode --yes
+```
+
+For local development or synchronization:
+
+```bash
+git clone https://github.com/XnLemon/Neneko-skill.git
+cd Neneko-skill
+```
+
+Use `--copy` instead of the default symlink method when symlinks are not suitable. To list, check, or update installed skills:
 
 ```bash
 npx skills@latest list

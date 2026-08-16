@@ -1,6 +1,6 @@
 # Personal Skills
 
-[English](README.en.md) | 中文
+[GitHub](https://github.com/XnLemon/Neneko-skill) · [English](README.en.md) | 中文
 
 个人统一的 Codex skill 整理仓库。
 
@@ -34,7 +34,20 @@ npx skills@latest add . --skill handle-review --agent codex --agent claude-code 
 npx skills@latest add . --skill handle-review --agent codex --agent claude-code --agent opencode --global --yes
 ```
 
-仓库发布到 GitHub 后，把 `./` 换成 `<owner>/neneko-skill` 即可。`--copy` 可替代默认的 symlink 方式；查看、检查和更新已安装 skill：
+从 GitHub 安装：
+
+```bash
+npx skills@latest add XnLemon/Neneko-skill --skill handle-review --agent codex --agent claude-code --agent opencode --yes
+```
+
+如需本地开发或同步仓库：
+
+```bash
+git clone https://github.com/XnLemon/Neneko-skill.git
+cd Neneko-skill
+```
+
+`--copy` 可替代默认的 symlink 方式；查看、检查和更新已安装 skill：
 
 ```bash
 npx skills@latest list
