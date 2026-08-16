@@ -1,5 +1,7 @@
 # Personal Skills
 
+[English](README.en.md) | 中文
+
 个人统一的 Codex skill 整理仓库。
 
 ## 目录
