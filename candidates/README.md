@@ -5,3 +5,7 @@
 ## 当前候选
 
 - `mycr`：`E:\Progarms\mycr\skill\SKILL.md`
+
+## 已纳入
+
+- `handle-review`：已复制到 `skills/handle-review/SKILL.md`
