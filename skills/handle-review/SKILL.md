@@ -81,17 +81,29 @@ Use `scope-unclear` when evidence conflicts. Explain the competing contracts and
 
 Do not use package names, changed-file lists, reviewer priority, implementation size, or personal preference as the sole scope test. A file outside the title can contain required closure; a nearby file can belong to a separate feature.
 
-## Calibrate With The PR 2402 Pattern
+## Generalize Scope Across Consumers
 
-Use these examples to distinguish closure from repository-wide parity:
+Use an invariant-to-boundary flow instead of memorizing repository-specific examples:
 
-- Gemini MIME normalization was required closure. The PR explicitly promised Gemini support, while values emitted by the new helpers and AG-UI path could be rejected at that provider boundary.
-- Graph video deep copy was required closure despite `graph` being outside the title. Adding a pointer-bearing `Video` variant broke an existing generic deep-copy isolation guarantee and risked cross-branch mutation and races.
-- Session video externalization was valid but adjacent. It was an opt-in persistence capability with a separate externalize/hydrate lifecycle, and the declared AG-UI-to-provider path remained correct without it.
-- A2A video and URL-audio transport was valid but adjacent. Supporting it required request and response round trips, metadata contracts, and two independent converter versions.
-- OTel and Langfuse media mapping was valid but adjacent. It affected an optional observability projection rather than request execution and could be delivered as a focused telemetry change.
+1. Extract the declared contract from the PR, issue, docs, and tests. Write down the supported input or state, the direct end-to-end path, the promised output, and the guarantees that must remain true.
+2. Identify what the change introduces or alters: a variant, representation, boundary conversion, generic operation, persistence form, transport form, or observability projection.
+3. Trace every consumer and label each path as one of:
+   - the declared execution path promised by the PR
+   - a shared generic invariant such as copying, equality, ownership, serialization, cancellation, or compatibility
+   - an optional capability with its own protocol, schema, metadata, migration, or lifecycle
+4. Verify the current HEAD at each relevant boundary. Use a caller-visible input or state that exercises the new behavior, then check for rejection, silent loss, corruption, aliasing, races, compatibility breaks, or missing representation.
+5. Classify the scope using the evidence:
 
-The general rule is: close invariants introduced or broken by the changed abstraction, but do not expand the PR into parity work for every independent consumer of that abstraction.
+| Evidence from the current contract | Default scope | Required action |
+| --- | --- | --- |
+| The declared path reaches a boundary that rejects, drops, corrupts, or misrepresents the new behavior | `required-closure` | Fix the boundary in this PR and add regression coverage |
+| A shared generic operation no longer preserves an established invariant for the new variant or representation | `required-closure` | Fix every path owned by that invariant and test isolation/round trips as applicable |
+| An optional consumer needs a new protocol, schema, metadata contract, migration, or externalize/hydrate lifecycle | `valid-adjacent` | Keep the current PR unchanged and define a focused follow-up |
+| The evidence supports competing contracts or the capability boundary is undefined | `scope-unclear` | Ask for a product or maintainer decision before expanding scope |
+
+6. Apply the smallest action that closes the selected contract. A finding in another package or file is still required when the changed abstraction's invariant reaches it. Conversely, do not implement repository-wide parity merely because another consumer can eventually use the abstraction; independent capabilities belong in focused follow-ups.
+
+The governing rule is: close invariants introduced or broken by the changed abstraction and the PR's declared path, but do not expand the PR into parity work for every independent consumer.
 
 ## Apply The Smallest Complete Fix
 
