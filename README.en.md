@@ -15,11 +15,7 @@ A personal repository for organizing and maintaining Codex skills.
 
 The repository has been initialized. Candidates are cataloged first, then selected, copied, or rewritten. Source files are not modified automatically.
 
-## Mainstream agent and skill installation
-
-The commands below are based on the vendors' current documentation. Installers and package-manager commands can change, so use the linked official documentation when a command no longer works.
-
-### Install a skill from this repository across agents (recommended)
+## Install skills across agents
 
 This repository uses the Agent Skills layout: `skills/<skill-name>/SKILL.md`. From the local repository root:
 
@@ -56,77 +52,6 @@ npx skills@latest update
 ```
 
 The installer supports Codex, Claude Code, OpenCode, Gemini CLI, and other tools compatible with the Agent Skills ecosystem. See the [`skills` CLI documentation](https://skills.sh/docs) and [vercel-labs/skills](https://github.com/vercel-labs/skills).
-
-### Install Codex CLI (OpenAI)
-
-macOS/Linux:
-
-```bash
-curl -fsSL https://chatgpt.com/codex/install.sh | sh
-codex
-```
-
-On Windows, OpenAI recommends WSL2. Run `wsl --install` from an elevated PowerShell, enter WSL, and run the installer above. On first launch, follow the prompt to sign in with ChatGPT.
-
-Official documentation: [Codex CLI](https://learn.chatgpt.com/docs/codex/cli), [Windows WSL](https://learn.chatgpt.com/docs/windows/wsl).
-
-### Install Claude Code
-
-Native installer (recommended):
-
-```bash
-# macOS / Linux / WSL
-curl -fsSL https://claude.ai/install.sh | bash
-
-# Windows PowerShell
-irm https://claude.ai/install.ps1 | iex
-
-# Windows CMD
-curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
-```
-
-Package-manager alternatives:
-
-```bash
-# Windows
-winget install Anthropic.ClaudeCode
-
-# macOS / Linux (Homebrew)
-brew install --cask claude-code
-```
-
-Verify with `claude --version`, then run `claude` inside a project directory. Native installs update automatically; WinGet and Homebrew installs require manual upgrades. Official documentation: [Claude Code Quickstart](https://code.claude.com/docs/en/quickstart).
-
-### Install OpenCode
-
-The simplest method:
-
-```bash
-curl -fsSL https://opencode.ai/install | bash
-```
-
-Node.js/npm alternative:
-
-```bash
-npm install -g opencode-ai
-opencode
-```
-
-On Windows, OpenCode recommends WSL; Chocolatey (`choco install opencode`), Scoop (`scoop install opencode`), and npm are also supported. After starting, use `/connect` to configure an LLM provider and API key. Official documentation: [OpenCode](https://opencode.ai/docs).
-
-### Install Gemini CLI (optional)
-
-Node.js 20+ is required. Install permanently or run without a permanent install:
-
-```bash
-# Global installation
-npm install -g @google/gemini-cli
-
-# No permanent installation
-npx @google/gemini-cli
-```
-
-Run `gemini` after installation and follow the first-run Google sign-in flow. Official documentation: [Gemini CLI installation](https://geminicli.com/docs/get-started/installation/).
 
 ## Organization conventions
 
